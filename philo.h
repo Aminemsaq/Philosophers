@@ -1,10 +1,10 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
 typedef struct s_philo
 {
@@ -15,4 +15,5 @@ typedef struct s_philo
 	int		num_times_to_eat;
 }			t_philo;
 
+int			ft_parsing(int ac, char **av, t_philo *data);
 #endif

@@ -5,7 +5,7 @@ RM      = rm -rf
 
 INCLUDE = philo.h
 
-SRC     = main.c ft_parsing.c
+SRC     = main.c ft_parsing.c init.c ft_utils.c
 
 OBJ     = $(SRC:.c=.o)
 

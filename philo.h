@@ -37,6 +37,7 @@ typedef struct s_program
 	t_philo			*philos;
 }					t_program;
 
-int					ft_parsing(int ac, char **av, t_philo *data);
-long	ft_atol(const char *str);
+int					ft_parsing(int ac, char **av);
+long				ft_atol(const char *str);
+void	init_input(t_philo *philo, char **argv);
 #endif

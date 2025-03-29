@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int	ft_check_overflow(int ac, char **av, t_philo *data)
+int	ft_check_overflow(int ac, char **av)
 {
 	if (ft_atol(av[1]) == -1)
 		return (0);
@@ -17,7 +17,7 @@ int	ft_check_overflow(int ac, char **av, t_philo *data)
 	}
 	return (1);
 }
-int	ft_parsing(int ac, char **av, t_philo *data)
+int	ft_parsing(int ac, char **av)
 {
 	int i = 1;
 	int j;
@@ -28,16 +28,12 @@ int	ft_parsing(int ac, char **av, t_philo *data)
 		while (av[i][j])
 		{
 			if (av[i][j] < '0' || av[i][j] > '9')
-			{
-				printf("ERROR, Not valid");
 				return (0);
-			}
 			j++;
 		}
 		i++;
 	}
-	if (ft_check_overflow(ac, av, data) == 0)
+	if (ft_check_overflow(ac, av) == 0)
 		return (0);
-
 	return (1);
 }

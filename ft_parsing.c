@@ -1,18 +1,38 @@
 #include "philo.h"
 
-int	ft_check_overflow(int ac, char **av)
+long	ft_atol(const char *str)
 {
-	if (ft_atol(av[1]) == -1)
+	long	result;
+	int		i;
+
+	result = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10) && str[i]
+				- '0' > LONG_MAX % 10))
+			return (-1);
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	if (result > INT_MAX)
+		return (-1);
+	return (result);
+}
+
+int	ft_check(int ac, char **av)
+{
+	if (ft_atol(av[1]) < 1)
 		return (0);
-	if (ft_atol(av[2]) == -1)
+	if (ft_atol(av[2]) < 1)
 		return (0);
-	if (ft_atol(av[3]) == -1)
+	if (ft_atol(av[3]) < 1)
 		return (0);
-	if (ft_atol(av[4]) == -1)
+	if (ft_atol(av[4]) < 1)
 		return (0);
 	if (ac - 1 == 5)
 	{
-		if (ft_atol(av[5]) == -1)
+		if (ft_atol(av[5]) < 1)
 			return (0);
 	}
 	return (1);
@@ -33,7 +53,7 @@ int	ft_parsing(int ac, char **av)
 		}
 		i++;
 	}
-	if (ft_check_overflow(ac, av) == 0)
+	if (ft_check(ac, av) == 0)
 		return (0);
 	return (1);
 }

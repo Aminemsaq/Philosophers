@@ -1,21 +1,41 @@
 #include "philo.h"
 
-long	ft_atol(const char *str)
+long	get_time(void)
 {
-	long	result;
-	int		i;
+	struct timeval	time;
+	long			ms;
 
-	result = 0;
-	i = 0;
-	while (str[i])
+	gettimeofday(&time, NULL);
+	ms = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (ms);
+}
+void	ft_usleep(long ms)
+{
+	long	end;
+
+	end = get_time() + ms;
+	while (get_time() < end)
+		usleep(50);
+}
+
+void	print_message(t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->data->print);
+	printf("%ld ms %d %s\n", get_time() - philo->data->time, philo->id + 1, str);
+	pthread_mutex_unlock(&philo->data->print);
+}
+
+int	check_eating(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	if (philo->data->nbr_of_must_eat < 0)
+		return (1);
+	while (++i < philo->data->nbr_of_philo)
 	{
-		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10) && str[i]
-				- '0' > LONG_MAX % 10))
-			return (-1);
-		result = (result * 10) + (str[i] - '0');
-		i++;
+		if (philo[i].count_eat != philo[i].num_eat)
+			return (1);
 	}
-	if (result > INT_MAX)
-		return (-1);
-	return (result);
+	return (0);
 }

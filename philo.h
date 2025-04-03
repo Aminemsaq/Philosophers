@@ -6,7 +6,7 @@
 /*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:13:03 by amsaq             #+#    #+#             */
-/*   Updated: 2025/04/02 19:28:29 by amsaq            ###   ########.fr       */
+/*   Updated: 2025/04/03 09:27:54 by amsaq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_data
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
-	int         stop;
 }					t_data;
 
 int					ft_parsing(int ac, char **av);

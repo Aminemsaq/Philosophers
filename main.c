@@ -6,7 +6,7 @@
 /*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:13:14 by amsaq             #+#    #+#             */
-/*   Updated: 2025/04/02 19:31:39 by amsaq            ###   ########.fr       */
+/*   Updated: 2025/04/03 09:29:58 by amsaq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	create_philo(t_data *data)
 		return (printf("Error create thread"), 0);
 	if (pthread_join(thread_id, NULL))
 		return (printf("Error joining thread"), 0);
-
 	return (0);
 }
 

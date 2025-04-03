@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 19:08:00 by amsaq             #+#    #+#             */
+/*   Updated: 2025/04/02 19:09:28 by amsaq            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	init_data(t_data *data, int ac, char **av)
 {
-    data->nbr_of_philo = ft_atol(av[1]);
+	data->nbr_of_philo = ft_atol(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
 	data->time_to_sleep = ft_atol(av[4]);
@@ -10,6 +22,7 @@ void	init_data(t_data *data, int ac, char **av)
 	if (ac == 6)
 		data->nbr_of_must_eat = ft_atol(av[5]);
 }
+
 void	init_info_philo(t_data *data)
 {
 	int	i;
@@ -30,6 +43,7 @@ void	init_info_philo(t_data *data)
 			data->philos[i].id_next = i + 1;
 	}
 }
+
 int	init_philo(t_data *data)
 {
 	int	i;

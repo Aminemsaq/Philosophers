@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 19:12:37 by amsaq             #+#    #+#             */
+/*   Updated: 2025/04/02 19:12:38 by amsaq            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 #include "philo.h"
 
 long	get_time(void)
@@ -9,6 +22,7 @@ long	get_time(void)
 	ms = time.tv_sec * 1000 + time.tv_usec / 1000;
 	return (ms);
 }
+
 void	ft_usleep(long ms)
 {
 	long	end;

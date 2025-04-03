@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 19:13:03 by amsaq             #+#    #+#             */
+/*   Updated: 2025/04/02 19:28:29 by amsaq            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -33,6 +45,7 @@ typedef struct s_data
 	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	int         stop;
 }					t_data;
 
 int					ft_parsing(int ac, char **av);
@@ -40,8 +53,8 @@ long				ft_atol(const char *str);
 void				init_data(t_data *data, int ac, char **av);
 int					init_philo(t_data *data);
 long				get_time(void);
-void	ft_usleep(long ms);
-void	print_message(t_philo *philo, char *str);
+void				ft_usleep(long ms);
+void				print_message(t_philo *philo, char *str);
 void				ft_free(t_data *data);
-int	check_eating(t_philo *philo);
+int					check_eating(t_philo *philo);
 #endif

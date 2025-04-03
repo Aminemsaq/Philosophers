@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 19:10:55 by amsaq             #+#    #+#             */
+/*   Updated: 2025/04/02 19:11:37 by amsaq            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 long	ft_atol(const char *str)
@@ -9,8 +21,8 @@ long	ft_atol(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10) && str[i]
-				- '0' > LONG_MAX % 10))
+		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10)
+				&& str[i] - '0' > LONG_MAX % 10))
 			return (-1);
 		result = (result * 10) + (str[i] - '0');
 		i++;
@@ -37,11 +49,13 @@ int	ft_check(int ac, char **av)
 	}
 	return (1);
 }
+
 int	ft_parsing(int ac, char **av)
 {
-	int i = 1;
-	int j;
+	int	i;
+	int	j;
 
+	i = 1;
 	while (i < ac)
 	{
 		j = 0;

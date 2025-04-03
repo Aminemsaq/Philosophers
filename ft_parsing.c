@@ -6,7 +6,7 @@
 /*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:10:55 by amsaq             #+#    #+#             */
-/*   Updated: 2025/04/02 19:11:37 by amsaq            ###   ########.fr       */
+/*   Updated: 2025/04/03 09:56:49 by amsaq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ long	ft_atol(const char *str)
 
 	result = 0;
 	i = 0;
+	if (!str[i])
+		return (-1);
 	while (str[i])
 	{
-		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10)
-				&& str[i] - '0' > LONG_MAX % 10))
+		if (result > (LONG_MAX / 10) || (result == (LONG_MAX / 10) && str[i]
+				- '0' > LONG_MAX % 10))
 			return (-1);
 		result = (result * 10) + (str[i] - '0');
 		i++;
@@ -34,17 +36,12 @@ long	ft_atol(const char *str)
 
 int	ft_check(int ac, char **av)
 {
-	if (ft_atol(av[1]) < 1)
-		return (0);
-	if (ft_atol(av[2]) < 1)
-		return (0);
-	if (ft_atol(av[3]) < 1)
-		return (0);
-	if (ft_atol(av[4]) < 1)
-		return (0);
-	if (ac - 1 == 5)
+	int	i;
+
+	i = 0;
+	while (++i < ac)
 	{
-		if (ft_atol(av[5]) < 1)
+		if (ft_atol(av[i]) < 1)
 			return (0);
 	}
 	return (1);

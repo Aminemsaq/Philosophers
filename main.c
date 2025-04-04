@@ -6,7 +6,7 @@
 /*   By: amsaq <amsaq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 19:13:14 by amsaq             #+#    #+#             */
-/*   Updated: 2025/04/04 11:31:15 by amsaq            ###   ########.fr       */
+/*   Updated: 2025/04/04 11:33:07 by amsaq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int ac, char **av)
 {
-	t_data	data;
 
 	if (ac < 5 || ac > 6)
 	{
@@ -23,5 +22,4 @@ int	main(int ac, char **av)
 	}
 	if (!ft_parsing(ac, av))
 		return (printf("Error: Wrong type of arguments.\n"));
-	ft_free(&data);
 }

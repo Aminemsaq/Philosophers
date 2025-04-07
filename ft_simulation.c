@@ -33,10 +33,27 @@ void    *routine(void *arg)
             break;
         }
         pthread_mutex_unlock(&philo->data->simulation_lock);
-        pthread_mutex_lock(philo->right_fork);
+
+        // Ensure consistent lock ordering
+        pthread_mutex_t *first_fork;
+        pthread_mutex_t *second_fork;
+
+        if (philo->id % 2 == 0)
+        {
+            first_fork = philo->left_fork;
+            second_fork = philo->right_fork;
+        }
+        else
+        {
+            first_fork = philo->right_fork;
+            second_fork = philo->left_fork;
+        }
+
+        pthread_mutex_lock(first_fork);
         print_message(philo, "has taken a fork");
-        pthread_mutex_lock(philo->left_fork);
+        pthread_mutex_lock(second_fork);
         print_message(philo, "has taken a fork");
+
         pthread_mutex_lock(&philo->data->meal_time_lock);
         philo->last_meal_time = get_time_in_ms();
         pthread_mutex_unlock(&philo->data->meal_time_lock);
@@ -49,8 +66,9 @@ void    *routine(void *arg)
             pthread_mutex_unlock(&philo->data->meal_time_lock);
         }
         ft_usleep(philo->data->time_to_eat);
-        pthread_mutex_unlock(philo->left_fork);
-        pthread_mutex_unlock(philo->right_fork);
+
+        pthread_mutex_unlock(second_fork);
+        pthread_mutex_unlock(first_fork);
 
         print_message(philo, "is sleeping");
         ft_usleep(philo->data->time_to_sleep);
@@ -99,28 +117,27 @@ void    *monitor(void *arg)
     }
 }
 
-int	start_simulation(t_data *data)
+int start_simulation(t_data *data)
 {
-	int i;
-	pthread_t monitor_thread;
+    int i;
+    pthread_t monitor_thread;
 
-	data->simulation_over = 0;
-	data->start_time = get_time_in_ms();
-	i = -1;
-	while (++i < data->num_philos)
-	{
-		data->philos[i].last_meal_time = data->start_time;
-	}
-	if (pthread_create(&monitor_thread, NULL, &monitor, data) != 0)
-		return (1);
-	i = -1;
-	while (++i < data->num_philos)
-		if (pthread_create(&data->philos[i].thread, NULL, &routine,
-				&data->philos[i]) != 0)
-			return (1);
-	i = -1;
-	while (++i < data->num_philos)
-		pthread_join(data->philos[i].thread, NULL);
-	pthread_join(monitor_thread, NULL);
-	return (0);
+    data->simulation_over = 0;
+    data->start_time = get_time_in_ms();
+    i = -1;
+    while (++i < data->num_philos)
+    {
+        data->philos[i].last_meal_time = data->start_time;
+    }
+    if (pthread_create(&monitor_thread, NULL, &monitor, data) != 0)
+        return (1);
+    i = -1;
+    while (++i < data->num_philos)
+        if (pthread_create(&data->philos[i].thread, NULL, &routine, &data->philos[i]) != 0)
+            return (1);
+    i = -1;
+    while (++i < data->num_philos)
+        pthread_join(data->philos[i].thread, NULL);
+    pthread_join(monitor_thread, NULL);
+    return (0);
 }
